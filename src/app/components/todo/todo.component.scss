@@ -11,8 +11,10 @@
     display: flex;
     align-items: center;
     flex: 1;
-    text-decoration: none;
-    color: #ddd;
+
+    a {
+      color: #ddd;
+    }
 
     .title {
       font-size: 14px;

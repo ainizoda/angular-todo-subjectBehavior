@@ -1,17 +1,17 @@
 <div style="margin: 20px 0">
   <div class="todo">
-    <a class="description" [routerLink]="[content.id]">
+    <div class="description">
       <div class="title" *ngIf="!editMode; else editModeCase">
-        <div>
+        <a [routerLink]="[content.id]">
           {{ content.title }}
-        </div>
+        </a>
       </div>
       <ng-template #editModeCase>
         <div class="input-container">
           <input class="edit" [(ngModel)]="newTitle" />
         </div>
       </ng-template>
-    </a>
+    </div>
 
     <div class="actions" *ngIf="!editMode; else editActions">
       <button (click)="handleEditModeOn()">
