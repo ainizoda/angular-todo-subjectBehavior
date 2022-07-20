@@ -1,0 +1,41 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  color: #fff;
+  padding: 0 1rem;
+  .todo-app {
+    .todos-container {
+      background-color: #2c3440;
+      margin-top: 28px;
+      padding: 20px;
+      border-radius: 10px;
+
+      .heading {
+        color: #29a19c;
+        font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+        font-size: 18px;
+      }
+    }
+
+    .title {
+      display: flex;
+      align-items: center;
+      color: #079892;
+      padding: 36px 0;
+
+      .text {
+        font-size: 24px;
+        padding-left: 16px;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .todos-container {
+    background-color: transparent !important;
+    padding: 0 !important;
+  }
+}
