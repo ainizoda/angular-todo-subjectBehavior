@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Todo } from './todo.models';
 import { TodoService } from './todo.service';
@@ -12,12 +13,22 @@ export class TodoComponent {
   @Input() public content: Todo = new Todo();
 
   public editMode: boolean = false;
-  public newTitle: string = '';
+
+  public todoEditForm: FormGroup = new FormGroup({
+    newTitle: new FormControl(''),
+    newDescription: new FormControl(''),
+    newAuthor: new FormControl(''),
+  });
 
   constructor(private _todoService: TodoService) {}
 
   handleEditModeOn() {
-    this.newTitle = this.content.title;
+    this.todoEditForm.setValue({
+      newTitle: this.content.title,
+      newDescription: this.content.description,
+      newAuthor: this.content.author,
+    });
+
     this.editMode = true;
   }
 
@@ -26,6 +37,6 @@ export class TodoComponent {
   }
 
   handleSaveChanges(id: number) {
-    this._todoService.editTodo({ id, newTitle: this.newTitle });
+    this._todoService.editTodo({ id, ...this.todoEditForm.value });
   }
 }

@@ -1,14 +1,31 @@
 <div style="margin: 20px 0">
+  <div class="info" *ngIf="!editMode">
+    <div class="author">{{ content.author }}</div>
+    <div class="title">{{ content.title }}</div>
+  </div>
   <div class="todo">
     <div class="description">
       <div class="title" *ngIf="!editMode; else editModeCase">
         <a [routerLink]="[content.id]">
-          {{ content.title }}
+          {{ content.description }}
         </a>
       </div>
       <ng-template #editModeCase>
         <div class="input-container">
-          <input class="edit" [(ngModel)]="newTitle" />
+          <form [formGroup]="todoEditForm">
+            <div class="input">
+              <input placeholder="title" formControlName="newTitle" />
+            </div>
+            <div class="input">
+              <input placeholder="author" formControlName="newAuthor" />
+            </div>
+            <div class="input">
+              <input
+                placeholder="description"
+                formControlName="newDescription"
+              />
+            </div>
+          </form>
         </div>
       </ng-template>
     </div>

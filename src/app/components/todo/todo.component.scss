@@ -40,9 +40,14 @@
   .input-container {
     width: 100%;
     padding-right: 1rem;
-    .edit {
+
+    form {
+      display: flex;
+      gap: 1rem;
+    }
+
+    input {
       padding: 0.2rem 0.5rem;
-      font-size: 28px;
       margin-right: 1rem;
       width: 100%;
     }
@@ -53,4 +58,18 @@
   padding: 8px;
   color: #ddd;
   font-size: 12px;
+}
+
+.info {
+  display: flex;
+  gap: 1rem;
+  padding: 8px;
+
+  .title {
+    font-weight: bold;
+  }
+  .author {
+    color: rgb(151, 151, 151);
+    font-style: italic;
+  }
 }

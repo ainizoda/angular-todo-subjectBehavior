@@ -1,3 +1,28 @@
+.info {
+  display: flex;
+  margin-bottom: 1rem;
+  justify-content: space-between;
+  gap: 1rem;
+
+  input {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    width: 100%;
+    color: #ddd;
+    font-size: 17px;
+    padding: 1px;
+  }
+
+  .input {
+    padding: 8px;
+    color: #29a19c;
+    border: 1px solid #079892;
+    flex: 1;
+    border-radius: 6px;
+  }
+}
+
 .form {
   background-color: #2c3440;
   border-radius: 10px;
@@ -12,6 +37,7 @@
     height: 100%;
     gap: 4px;
   }
+
   .input {
     width: 100%;
 
@@ -26,12 +52,17 @@
   }
 
   .button {
-    background-color: #29a19c;
     display: flex;
+    background-color: #29a19c;
+    border: none;
     padding: 14px 15px;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     cursor: pointer;
+
+    &:disabled {
+      background-color: rgb(175, 175, 175);
+    }
 
     &:hover {
       opacity: 0.7;
@@ -44,5 +75,9 @@
     input {
       font-size: 16px !important;
     }
+  }
+
+  .info {
+    flex-direction: column;
   }
 }

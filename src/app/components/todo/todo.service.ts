@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
 
 import { BehaviorSubject, Observable } from 'rxjs';
 
@@ -32,7 +31,12 @@ export class TodoService {
           return todo;
         }
 
-        return { ...todo, title: editedTodo.newTitle };
+        return {
+          ...todo,
+          title: editedTodo.newTitle,
+          description: editedTodo.newDescription,
+          author: editedTodo.newAuthor,
+        };
       })
     );
   }
