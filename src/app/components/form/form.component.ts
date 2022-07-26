@@ -43,7 +43,7 @@ export class FormComponent {
   checkControlForError(controlName: string) {
     const value = this.todoForm.get(controlName)?.value;
 
-    if (value?.trim() === '') {
+    if (value?.trim() === '' || value === null) {
       this.formErrors[controlName] = 'This field is required';
 
       return true;
@@ -81,5 +81,7 @@ export class FormComponent {
 
     this._todoService.addTodo(todo);
     this.todoForm.reset();
+
+    this.isFormSubmitted = false;
   }
 }
