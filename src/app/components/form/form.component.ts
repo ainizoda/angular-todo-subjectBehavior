@@ -1,11 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  AbstractControl,
-  FormControl,
-  FormControlState,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { Todo } from '../todo/todo.models';
 import { TodoService } from '../todo/todo.service';
@@ -49,28 +43,26 @@ export class FormComponent {
   checkControlForError(controlName: string) {
     const value = this.todoForm.get(controlName)?.value;
 
-    let caughtError: boolean = false;
-
     if (value?.trim() === '') {
       this.formErrors[controlName] = 'This field is required';
 
-      caughtError = true;
+      return true;
     }
 
     if (value?.trim().length < 8) {
       this.formErrors[controlName] =
         'This field must be at least 8 characters long';
 
-      caughtError = true;
+      return true;
     }
 
-    return caughtError;
+    return false;
   }
 
   validateForm() {
-    let errorCount = 0;
-
     const fields = Object.keys(this.formErrors);
+
+    let errorCount = 0;
 
     for (let i = 0; i < fields.length; i++)
       if (this.checkControlForError(fields[i])) errorCount++;
