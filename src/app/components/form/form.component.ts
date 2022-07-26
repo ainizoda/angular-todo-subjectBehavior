@@ -49,26 +49,28 @@ export class FormComponent {
   checkControlForError(controlName: string) {
     const value = this.todoForm.get(controlName)?.value;
 
+    let caughtError: boolean = false;
+
     if (value?.trim() === '') {
       this.formErrors[controlName] = 'This field is required';
 
-      return true;
+      caughtError = true;
     }
 
     if (value?.trim().length < 8) {
       this.formErrors[controlName] =
         'This field must be at least 8 characters long';
 
-      return true;
+      caughtError = true;
     }
 
-    return false;
+    return caughtError;
   }
 
   validateForm() {
     let errorCount = 0;
 
-    let fields = Object.keys(this.formErrors);
+    const fields = Object.keys(this.formErrors);
 
     for (let i = 0; i < fields.length; i++)
       if (this.checkControlForError(fields[i])) errorCount++;
