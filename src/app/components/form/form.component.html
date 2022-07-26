@@ -10,11 +10,8 @@
           placeholder="author"
         />
       </div>
-      <div
-        class="input-error"
-        *ngIf="validateControl(todoForm.get('info.author'))"
-      >
-        {{ logError(todoForm.get("info.author")) }}
+      <div class="input-error" *ngIf="shouldLogError('info.author')">
+        {{ formErrors["info.author"] }}
       </div>
     </div>
     <div class="input-container">
@@ -26,11 +23,8 @@
           minlength="8"
         />
       </div>
-      <div
-        class="input-error"
-        *ngIf="!todoForm.get('info.description')?.valid && hasError"
-      >
-        {{ logError(todoForm.get("info.description")) }}
+      <div class="input-error" *ngIf="shouldLogError('info.description')">
+        {{ formErrors["info.description"] }}
       </div>
     </div>
   </div>
@@ -80,8 +74,8 @@
         </button>
       </div>
     </div>
-    <div class="input-error" *ngIf="!todoForm.get('title')?.valid && hasError">
-      {{ logError(todoForm.get("title")) }}
+    <div class="input-error" *ngIf="shouldLogError('title')">
+      {{ formErrors["title"] }}
     </div>
   </div>
 </form>

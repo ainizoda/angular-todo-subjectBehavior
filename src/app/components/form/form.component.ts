@@ -24,49 +24,64 @@ export interface TodoForm {
   templateUrl: `./form.component.html`,
 })
 export class FormComponent {
-  public hasError: boolean = false;
+  public isFormSubmitted: boolean = false;
+
+  public formErrors: Record<string, string> = {
+    title: '',
+    'info.description': '',
+    'info.author': '',
+  };
 
   public todoForm: FormGroup = new FormGroup({
-    title: new FormControl('', [
-      Validators.required,
-      Validators.min(8),
-      Validators.max(25),
-    ]),
+    title: new FormControl(''),
     info: new FormGroup({
-      description: new FormControl('', [
-        Validators.required,
-        Validators.min(8),
-      ]),
+      description: new FormControl(''),
       author: new FormControl('', [Validators.required, Validators.min(8)]),
     }),
   });
 
-  public todoControls: any = this.todoForm.controls;
-
   constructor(private _todoService: TodoService) {}
 
-  validateControl(control: AbstractControl | null) {
-    return control?.invalid && this.hasError;
+  shouldLogError(controlName: string) {
+    return this.isFormSubmitted && this.checkControlForError(controlName);
   }
 
-  logError(control: AbstractControl | null) {
-    let errorTexts: any = {
-      required: 'This field is required',
-      minlength: 'This field must be at least 8 characters long',
-    };
+  checkControlForError(controlName: string) {
+    const value = this.todoForm.get(controlName)?.value;
 
-    if (control?.errors) {
-      return errorTexts[Object.keys(control?.errors)[0]];
+    if (value?.trim() === '') {
+      this.formErrors[controlName] = 'This field is required';
+
+      return true;
     }
+
+    if (value?.trim().length < 8) {
+      this.formErrors[controlName] =
+        'This field must be at least 8 characters long';
+
+      return true;
+    }
+
+    return false;
+  }
+
+  validateForm() {
+    let errorCount = 0;
+
+    let fields = Object.keys(this.formErrors);
+
+    for (let i = 0; i < fields.length; i++)
+      if (this.checkControlForError(fields[i])) errorCount++;
+
+    return errorCount > 0;
   }
 
   handleSubmit() {
-    if (this.todoForm.invalid) {
-      this.hasError = true;
+    this.isFormSubmitted = true;
+
+    if (this.validateForm()) {
       return;
     }
-
-    this.hasError = false;
 
     const todo: Todo = new Todo(this.todoForm.value);
 
