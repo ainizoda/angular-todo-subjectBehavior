@@ -1,53 +1,87 @@
 <form [formGroup]="todoForm" (ngSubmit)="handleSubmit()">
   <div class="info" formGroupName="info">
-    <div class="input">
-      <input type="text" formControlName="author" placeholder="author" />
+    <div class="input-container">
+      <div class="input">
+        <input
+          type="text"
+          minlength="8"
+          maxlength="25"
+          formControlName="author"
+          placeholder="author"
+        />
+      </div>
+      <div
+        class="input-error"
+        *ngIf="validateControl(todoForm.get('info.author'))"
+      >
+        {{ logError(todoForm.get("info.author")) }}
+      </div>
     </div>
-    <div class="input">
-      <input
-        type="text"
-        formControlName="description"
-        placeholder="description"
-      />
+    <div class="input-container">
+      <div class="input">
+        <input
+          type="text"
+          formControlName="description"
+          placeholder="description"
+          minlength="8"
+        />
+      </div>
+      <div
+        class="input-error"
+        *ngIf="!todoForm.get('info.description')?.valid && hasError"
+      >
+        {{ logError(todoForm.get("info.description")) }}
+      </div>
     </div>
   </div>
-  <div class="form">
-    <div class="form-wrapper">
-      <div class="input">
-        <input type="text" formControlName="title" placeholder="title" />
-      </div>
 
-      <button [disabled]="shouldButtonBeDisabled" class="button" type="submit">
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 20 20"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M10 19C14.9706 19 19 14.9706 19 10C19 5.02944 14.9706 1 10 1C5.02944 1 1 5.02944 1 10C1 14.9706 5.02944 19 10 19Z"
-            stroke="#FAFAFA"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+  <div>
+    <div class="form">
+      <div class="form-wrapper">
+        <div class="input">
+          <input
+            type="text"
+            formControlName="title"
+            placeholder="title"
+            minlength="8"
           />
-          <path
-            d="M10 6.39999V13.6"
-            stroke="#FAFAFA"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-          <path
-            d="M6.40002 10H13.6"
-            stroke="#FAFAFA"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-      </button>
+        </div>
+
+        <button class="button" type="submit">
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 20 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M10 19C14.9706 19 19 14.9706 19 10C19 5.02944 14.9706 1 10 1C5.02944 1 1 5.02944 1 10C1 14.9706 5.02944 19 10 19Z"
+              stroke="#FAFAFA"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M10 6.39999V13.6"
+              stroke="#FAFAFA"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M6.40002 10H13.6"
+              stroke="#FAFAFA"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="input-error" *ngIf="!todoForm.get('title')?.valid && hasError">
+      {{ logError(todoForm.get("title")) }}
     </div>
   </div>
 </form>

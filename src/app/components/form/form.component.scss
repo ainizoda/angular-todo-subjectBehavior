@@ -1,25 +1,35 @@
+.input-error {
+  color: tomato;
+  padding: 0.3rem;
+  font-size: 12px;
+}
+
 .info {
   display: flex;
   margin-bottom: 1rem;
   justify-content: space-between;
   gap: 1rem;
 
-  input {
-    border: none;
-    outline: none;
-    background-color: transparent;
-    width: 100%;
-    color: #ddd;
-    font-size: 17px;
-    padding: 1px;
-  }
-
-  .input {
-    padding: 8px;
-    color: #29a19c;
-    border: 1px solid #079892;
+  .input-container {
     flex: 1;
-    border-radius: 6px;
+
+    .input {
+      padding: 8px;
+      color: #29a19c;
+      border: 1px solid #079892;
+      flex: 1;
+      border-radius: 6px;
+
+      input {
+        border: none;
+        outline: none;
+        background-color: transparent;
+        width: 100%;
+        color: #ddd;
+        font-size: 17px;
+        padding: 1px;
+      }
+    }
   }
 }
 
