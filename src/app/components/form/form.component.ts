@@ -37,7 +37,10 @@ export class FormComponent {
   constructor(private _todoService: TodoService) {}
 
   shouldLogError(controlName: string) {
-    return this.isFormSubmitted && this.checkControlForError(controlName);
+    return (
+      this.todoForm.get(controlName)?.touched &&
+      this.checkControlForError(controlName)
+    );
   }
 
   checkControlForError(controlName: string) {
